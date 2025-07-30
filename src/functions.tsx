@@ -2,10 +2,10 @@ export function getGrade(grades:any): string {
     if (!grades) 
         return "N/A";
     return(
-        grades.french ||
         grades.yds ||
-        grades.font ||
+        grades.french ||
         grades.vscale ||
+        grades.font ||
         grades.uiaa ||
         grades.ewbank ||
         grades.brazilianCrux ||

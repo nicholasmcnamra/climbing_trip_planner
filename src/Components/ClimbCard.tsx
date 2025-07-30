@@ -14,7 +14,6 @@ export const ClimbCard:React.FC<{ area: string, climb: Climb }> = ({ area, climb
     const grade = getGrade(climb.grades);
     const types = getGradeType(climb.type);
 
-
     return (
         <Card
             sx={{
