@@ -9,17 +9,15 @@ import { useTrip } from "../../Context/TripContext";
 
 
 const TripPlanner:React.FC = () => {
-    const [activeSection, setActiveSection] = useState("Explore");
+    const [activeSection, setActiveSection] = useState("Crags");
     const { trip } = useTrip();
 
     const renderActiveSection = () => {
         switch (activeSection) {
-            case "Explore":
-                return <Explore></Explore>
-            case "Notes":
-                return <Notes></Notes>
             case "Crags":
                 return <Crags></Crags>
+            case "Notes":
+                return <Notes></Notes>
             case "Itinerary":
                 return <Itinerary></Itinerary>
             case "Budget":
@@ -40,7 +38,7 @@ const TripPlanner:React.FC = () => {
                     Trip Planner
                 </Typography>
                 <List>
-                    {["Explore", "Notes", "Crags", "Itinerary", "Budget"].map((section) => (
+                    {["Crags", "Notes", "Itinerary", "Budget"].map((section) => (
                         <ListItem disablePadding key={section}>
                              <ListItemButton onClick={() => setActiveSection(section)}>
                                 <ListItemText primary={section}/>
