@@ -9,6 +9,7 @@ import Navbar from './Components/Navbar';
 import CragSelection from './Components/CragSelection';
 import TripPlanner from './Components/TripPlannerSections/TripPlanner';
 import { TripProvider } from './Context/TripContext';
+import ClimbDescription from './Components/ClimbDescription';
 
 export const apolloClient = new ApolloClient({
   uri: 'https://stg-api.openbeta.io',
@@ -25,7 +26,6 @@ function App() {
               <Routes>
                 <Route path='/' element={<LandingPage/>}/>
                 <Route path="/start-planning" element={<AreaSearch/>}/>
-                <Route path="select-crags" element={<CragSelection/>}/>
                 <Route path="trip-planner" element={<TripPlanner/>}></Route>
               </Routes>
             </Router>

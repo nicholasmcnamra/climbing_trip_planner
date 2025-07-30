@@ -9,10 +9,12 @@ type Area = {
     children: Array<any>
 }
 
-const CragSelection:React.FC = () => {
+const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }> = ( {onClimbSelect} ) => {
     const { trip } = useTrip();
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [selectedCrag, setSelectedCrag] = useState<any | null>(null);
+
+    
 
     const handleSelect = (index:number) => {
         setSelectedIndex(index);
@@ -25,6 +27,7 @@ const CragSelection:React.FC = () => {
             <Box>No area selected</Box>
         )
     }
+
     return (
         <Box sx={{
             display: "flex",
@@ -70,7 +73,7 @@ const CragSelection:React.FC = () => {
                             gap={2}
                         >
                             {trip.current.selectedArea.children[selectedIndex].climbs.map((climb: any, index: number) => (
-                                    <ClimbCard area={selectedCrag.area_name} climb={climb}></ClimbCard>
+                                    <ClimbCard area={selectedCrag.area_name} climb={climb} onClick={() => onClimbSelect(climb, selectedCrag) }></ClimbCard>
                             ))}
                         </Box>
                     </Box>

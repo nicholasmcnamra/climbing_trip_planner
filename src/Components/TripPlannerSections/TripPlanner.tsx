@@ -1,21 +1,37 @@
 import { Box, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material"
-import { useContext, useState } from "react";
-import Explore from "./Explore";
+import { useState } from "react";
 import Notes from "./Notes";
-import Crags from "./CragsPage";
 import Itinerary from "./Itinerary";
 import Budget from "./Budget";
 import { useTrip } from "../../Context/TripContext";
+import ClimbDescription from "../ClimbDescription";
+import CragSelection from "../CragSelection";
 
 
 const TripPlanner:React.FC = () => {
     const [activeSection, setActiveSection] = useState("Crags");
     const { trip } = useTrip();
+    const [selectedClimb, setSelectedClimb] = useState<any | null>(null);
+    const [parentCrag, setParentCrag] = useState<any | null>(null);
 
-    const renderActiveSection = () => {
+    const renderMainContent = () => {
+
+        if (selectedClimb && parentCrag) {
+            return (
+                <ClimbDescription
+                    selectedClimb={selectedClimb}
+                    parentCrag={parentCrag}
+                    onBack={() => {setSelectedClimb(null); setParentCrag(null)}}
+                    setSelectedClimb={setSelectedClimb}
+                />
+            );
+        }
         switch (activeSection) {
             case "Crags":
-                return <Crags></Crags>
+                return <CragSelection onClimbSelect={(climb:any, crag:any) => {
+                    setSelectedClimb(climb);
+                    setParentCrag(crag);
+                }}/>
             case "Notes":
                 return <Notes></Notes>
             case "Itinerary":
@@ -40,7 +56,7 @@ const TripPlanner:React.FC = () => {
                 <List>
                     {["Crags", "Notes", "Itinerary", "Budget"].map((section) => (
                         <ListItem disablePadding key={section}>
-                             <ListItemButton onClick={() => setActiveSection(section)}>
+                             <ListItemButton onClick={() => {setActiveSection(section); setSelectedClimb(null); setParentCrag(null)}}>
                                 <ListItemText primary={section}/>
                              </ListItemButton>
                         </ListItem>
@@ -52,7 +68,7 @@ const TripPlanner:React.FC = () => {
                 <Typography variant="h4">
                     Trip to {trip.current?.selectedArea?.area_name || "[Selected Area]"}
                 </Typography>
-                {renderActiveSection()}
+                {renderMainContent()}
             </Box>
 
             <Box

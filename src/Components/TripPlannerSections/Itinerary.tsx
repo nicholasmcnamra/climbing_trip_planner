@@ -18,7 +18,9 @@ const Itinerary:React.FC = () => {
                         <Divider sx={{ mb: 1 }}>
                             {climbs.map((climb:any, index:number) => (
                                 <Box key={climb.id || index} sx={{ ml: 2 }}>
-                                    <ClimbCard area={area} climb={climb}></ClimbCard>
+                                    <ClimbCard area={area} climb={climb} onClick={function (): void {
+                                        throw new Error("Function not implemented.");
+                                    } }></ClimbCard>
                                 </Box>
                             ))}
                         </Divider>
