@@ -21,7 +21,6 @@ const TripPlanner:React.FC = () => {
                 <ClimbDescription
                     selectedClimb={selectedClimb}
                     parentCrag={parentCrag}
-                    onBack={() => {setSelectedClimb(null); setParentCrag(null)}}
                     setSelectedClimb={setSelectedClimb}
                 />
             );
