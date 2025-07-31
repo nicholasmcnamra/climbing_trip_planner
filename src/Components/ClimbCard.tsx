@@ -1,7 +1,6 @@
 import { Button, Card, CardContent, Chip, Stack, Typography } from "@mui/material";
 import { getGrade, getGradeType } from "../functions";
 import { useTrip } from "../Context/TripContext";
-import { useNavigate } from "react-router-dom";
 
 export type Climb = {
     id: string;

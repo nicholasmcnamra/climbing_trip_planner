@@ -1,5 +1,5 @@
-import { useLazyQuery } from "@apollo/client"
-import { Box, IconButton, TextField } from "@mui/material"
+import { useBackgroundQuery, useLazyQuery } from "@apollo/client"
+import { Box, Grid, IconButton, TextField, useTheme } from "@mui/material"
 import { GET_AREAS } from "../GraphQL/AreaSearchQuery"
 import { useRef } from "react"
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -14,6 +14,7 @@ const AreaSearch:React.FC = () => {
     const endDate = useRef<Date | null>(null);
     // const [selectedArea, setSelectedArea] = useState<any>(null);
     const { trip } = useTrip();
+    const theme = useTheme();
     const [getAreas, { loading, error, data }] = useLazyQuery(GET_AREAS);
 
     const handleSubmit = (e:React.FormEvent) => {
@@ -47,40 +48,80 @@ const AreaSearch:React.FC = () => {
     // }, [data, selectedArea]);
 
     return (
-            <Box 
+            <Grid 
                 component="form"
                 onSubmit={handleSubmit}
+                container
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
                 sx={{
-                    display: "flex",
-                    gap: 2,
-                    alignItems: "center",
-                    flexWrap: "wrap",
+                    minHeight:"100vh",
+                    px: 2,
                 }}
                 >
-                <TextField
-                    id="search-area"
-                    className="text"
-                    inputRef={searchArea}
-                    label="Where to?"
-                />
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DesktopDatePicker
-                        label="Start Date"
-                        onChange={(newDate) => {
-                            startDate.current = newDate?.toDate() ?? null
-                        }}
+                <Grid
+                    sx={{
+                        maxWidth: 500,
+                        width: '100%',
+                    }}
+                >
+                    <TextField
+                        id="search-area"
+                        className="text"
+                        inputRef={searchArea}
+                        label="Where to?"
+                        fullWidth
+                        margin="normal"
                     />
-                    <DesktopDatePicker
-                        label="End Date"
-                        onChange={(newDate) => {
-                            endDate.current = newDate?.toDate() ?? null
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <Box
+                            display="flex"
+                            gap={2}
+                            mt={2}
+                            flexDirection={{
+                                xs: "column",
+                                sm: "row",
+                            }}
+                        >
+                            <DesktopDatePicker
+                                label="Start Date"
+                                onChange={(newDate) => {
+                                    startDate.current = newDate?.toDate() ?? null
+                                }}
+                            />
+                            <DesktopDatePicker
+                                label="End Date"
+                                onChange={(newDate) => {
+                                    endDate.current = newDate?.toDate() ?? null
+                                }}
+                            />
+                        </Box>
+                    </LocalizationProvider>
+                    <Grid
+                        sx={{
+                            mt: 6,
                         }}
-                    />
-                </LocalizationProvider>
-                <IconButton type="submit" aria-label="search">
-                    Start Planning
-                </IconButton>
-            </Box>
+                    >
+                        <IconButton 
+                            type="submit" 
+                            aria-label="search"
+                            sx={{
+                                px: 4,
+                                py: 2,
+                                backgroundColor: theme.palette.secondary.dark,
+                                color: "white",
+                                borderRadius: 2,
+                                '&:hover': {
+                                    backgroundColor: theme.palette.secondary.light,
+                                }
+                            }}
+                        >
+                            Plan Trip
+                        </IconButton>
+                    </Grid>
+                </Grid>
+            </Grid>
     )
 }
 

@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import { Climb, ClimbCard } from "../Components/ClimbCard";
+import { ClimbCard } from "../Components/ClimbCard";
 import { getGrade, getGradeType } from "../functions";
 
-const ClimbDescription:React.FC<{ selectedClimb: any, parentCrag: any, setSelectedClimb: (climb: any) => void }> = ({selectedClimb, parentCrag, setSelectedClimb}) => {
+const ClimbDescription:React.FC<{ selectedClimb: any, parentCrag: any, setSelectedClimb: (climb: any) => void }> = ({ selectedClimb, parentCrag, setSelectedClimb }) => {
 
   if (!selectedClimb) {
     return <Typography>Climb not found.</Typography>;

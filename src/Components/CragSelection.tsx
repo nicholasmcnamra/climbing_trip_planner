@@ -1,5 +1,4 @@
 import { Box, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import { ClimbCard } from "./ClimbCard";
 import { useTrip } from "../Context/TripContext";
@@ -35,7 +34,7 @@ const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }>
         }}>
             <Box
                 sx={{
-                    width: 300,
+                    width: 700,
                     borderRight: "1px solid #ccc",
                     overflowY: "auto",
                     padding: 1,
