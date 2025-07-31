@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Chip, Stack, Typography } from "@mui/material";
+import { Button, Card, CardContent, Chip, Stack, Typography, useTheme } from "@mui/material";
 import { getGrade, getGradeType } from "../functions";
 import { useTrip } from "../Context/TripContext";
 
@@ -13,11 +13,14 @@ export const ClimbCard:React.FC<{ area: string, climb: Climb, onClick: () => voi
     const { addClimbToItinerary, removeClimbFromItinerary, isClimbInItinerary } = useTrip();
     const grade = getGrade(climb.grades);
     const types = getGradeType(climb.type);
+    const theme = useTheme();
 
     return (
         <Card
             sx={{
-                minHeight: 150, p: 2
+            minHeight: 150, 
+            p: 2, 
+            maxHeight: 300,
             }}
             onClick={onClick}
         >
@@ -33,7 +36,19 @@ export const ClimbCard:React.FC<{ area: string, climb: Climb, onClick: () => voi
                 </Stack>
                 
                 { !isClimbInItinerary(area, climb.id) ?
-                    <Button onClick={(e) => {e.stopPropagation(); addClimbToItinerary(area, climb)}}>Add Climb</Button>
+                    <Button 
+                    onClick={(e) => {e.stopPropagation(); addClimbToItinerary(area, climb)}}
+                    sx={{
+                        backgroundColor: theme.palette.secondary.dark,
+                        color: "white",
+                        borderRadius: 2,
+                        '&:hover': {
+                            backgroundColor: theme.palette.secondary.light,
+                        }
+                    }}
+                    >
+                        Add Climb
+                    </Button>
                 :
                     <Button onClick={(e) => {e.stopPropagation(); removeClimbFromItinerary(area, climb.id)}}>Remove Climb</Button>}
             </CardContent>

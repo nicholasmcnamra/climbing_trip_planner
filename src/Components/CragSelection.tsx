@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { Box, List, ListItem, ListItemButton, ListItemText, useTheme } from "@mui/material";
 import { useState } from "react";
 import { ClimbCard } from "./ClimbCard";
 import { useTrip } from "../Context/TripContext";
@@ -12,8 +12,7 @@ const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }>
     const { trip } = useTrip();
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [selectedCrag, setSelectedCrag] = useState<any | null>(null);
-
-    
+    const theme = useTheme();
 
     const handleSelect = (index:number) => {
         setSelectedIndex(index);
@@ -34,7 +33,7 @@ const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }>
         }}>
             <Box
                 sx={{
-                    width: 700,
+                    width: 300,
                     borderRight: "1px solid #ccc",
                     overflowY: "auto",
                     padding: 1,
@@ -62,17 +61,47 @@ const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }>
                 </List>
             </Box>
 
-            <Box sx={{ flexGrow: 1, p: 2 }}>
+            <Box 
+                sx={{ 
+                flexGrow: 1, 
+                p: 2, 
+                display: "flex",
+                flexDirection: "column",
+                height: "100vh",
+                }}
+            >
                 {selectedIndex !== null ? (
-                    <Box>
+                    <Box
+                        sx={{
+                            flexGrow: 1,
+                            display: "flex",
+                            flexDirection: "column",
+                            minHeight: 0,
+                        }}
+                    >
                         <h2>{trip.current.selectedArea.children[selectedIndex].area_name}</h2>
                         <Box 
-                            display="grid"
-                            gridTemplateColumns="repeat(3, 1fr)"
-                            gap={2}
+                            sx={{
+                                flexGrow: 1,
+                                overflowY: "auto",
+                                minHeight: 0,
+                                borderColor: theme.palette.secondary.dark
+                            }}
                         >
                             {trip.current.selectedArea.children[selectedIndex].climbs.map((climb: any, index: number) => (
-                                    <ClimbCard area={selectedCrag.area_name} climb={climb} onClick={() => onClimbSelect(climb, selectedCrag) }></ClimbCard>
+                                <Box
+                                    key={index}
+                                    sx={{
+                                        borderBottom: index !== trip.current.selectedArea.children[selectedIndex].climbs.length - 1 ? "1px solid" : "none",
+                                        borderBottomColor: theme.palette.secondary.dark,
+                                    }}
+                                >
+                                    <ClimbCard 
+                                        area={selectedCrag.area_name} 
+                                        climb={climb} 
+                                        onClick={() => onClimbSelect(climb, selectedCrag) }
+                                    />
+                                </Box>
                             ))}
                         </Box>
                     </Box>

@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material"
+import { Box, List, ListItem, ListItemButton, ListItemText, Typography, useTheme } from "@mui/material"
 import { useState } from "react";
 import Notes from "./Notes";
 import Itinerary from "./Itinerary";
@@ -6,6 +6,7 @@ import Budget from "./Budget";
 import { useTrip } from "../../Context/TripContext";
 import ClimbDescription from "../ClimbDescription";
 import CragSelection from "../CragSelection";
+import { Palette } from "@mui/icons-material";
 
 
 const TripPlanner:React.FC = () => {
@@ -13,6 +14,7 @@ const TripPlanner:React.FC = () => {
     const { trip } = useTrip();
     const [selectedClimb, setSelectedClimb] = useState<any | null>(null);
     const [parentCrag, setParentCrag] = useState<any | null>(null);
+    const theme = useTheme();
 
     const renderMainContent = () => {
 
@@ -40,13 +42,20 @@ const TripPlanner:React.FC = () => {
         }
     }
     return (
-        <Box sx={{display: "flex", height: "100vh"}}>
+        <Box 
+            sx={{
+            display: "flex", 
+            height: "100vh",
+            overflow: "hidden",
+            }}
+        >
             <Box
                 sx={{
-                    width: "200px",
-                    borderRight: "1px solid #ddd",
-                    p: 2,
-                    backgroundColor: "#f5f5f5",
+                width: "200px",
+                borderRight: "1px solid #ddd",
+                p: 2,
+                backgroundColor: theme.palette.secondary.dark,
+                color: theme.palette.primary.light,
                 }}
             >
                 <Typography variant="h6">
@@ -55,7 +64,15 @@ const TripPlanner:React.FC = () => {
                 <List>
                     {["Crags", "Notes", "Itinerary", "Budget"].map((section) => (
                         <ListItem disablePadding key={section}>
-                             <ListItemButton onClick={() => {setActiveSection(section); setSelectedClimb(null); setParentCrag(null)}}>
+                             <ListItemButton 
+                                onClick={() => {setActiveSection(section); setSelectedClimb(null); setParentCrag(null)}}
+                                sx={{
+                                '&:hover': {
+                                    backgroundColor: theme.palette.primary.dark,
+                                    borderRadius: 2,
+                                    }   
+                                }}
+                             >
                                 <ListItemText primary={section}/>
                              </ListItemButton>
                         </ListItem>
@@ -63,7 +80,13 @@ const TripPlanner:React.FC = () => {
                 </List>
             </Box>
 
-            <Box sx={{ flex: 1, p: 3 }}>
+            <Box 
+                sx={{ 
+                flex: 1, 
+                p: 3,
+                overflowY: "auto",
+            }}
+            >
                 <Typography variant="h4">
                     Trip to {trip.current?.selectedArea?.area_name || "[Selected Area]"}
                 </Typography>
