@@ -1,9 +1,10 @@
 import { Box, Divider, List, Typography } from "@mui/material"
 import { useTrip } from "../../Context/TripContext";
 import { ClimbCard } from "../ClimbCard";
+import { CragAccordion } from "./CragAccordion";
 
 const Itinerary:React.FC = () => {
-    const { trip } = useTrip();
+    const { trip, removeClimbFromItinerary } = useTrip();
 
     const itinerary = trip.current.itinerary;
 
@@ -16,13 +17,14 @@ const Itinerary:React.FC = () => {
                     <Box sx={{mb: 3}}>
                         <Typography variant="h6">{area || "Unknown Area"}</Typography>
                         <Divider sx={{ mb: 1 }}>
-                            {climbs.map((climb:any, index:number) => (
+                            <CragAccordion crag={area} climbs={climbs}></CragAccordion>
+                            {/* {climbs.map((climb:any, index:number) => (
                                 <Box key={climb.id || index} sx={{ ml: 2 }}>
                                     <ClimbCard area={area} climb={climb} onClick={function (): void {
                                         throw new Error("Function not implemented.");
                                     } }></ClimbCard>
                                 </Box>
-                            ))}
+                            ))} */}
                         </Divider>
                     </Box>
                 ))}
