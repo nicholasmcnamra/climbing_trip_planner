@@ -59,7 +59,12 @@ const TripPlanner:React.FC = () => {
                 color: theme.palette.primary.light,
                 }}
             >
-                <Typography variant="h6">
+                <Typography 
+                    variant="h6"
+                    sx={{
+                        p: 2,
+                    }}
+                >
                     Trip Planner
                 </Typography>
                 <List>
@@ -88,7 +93,12 @@ const TripPlanner:React.FC = () => {
                 overflowY: "auto",
             }}
             >
-                <Typography variant="h4">
+                <Typography 
+                    variant="h4"
+                    sx={{
+                        p: 0,
+                    }}
+                >
                     Trip to {trip.current?.selectedArea?.area_name || "[Selected Area]"}
                 </Typography>
                 {renderMainContent()}
@@ -102,7 +112,13 @@ const TripPlanner:React.FC = () => {
                     backgroundColor: "#fafafa",
                 }}
             >
-                <Typography variant="h6" gutterBottom>
+                <Typography 
+                    variant="h6" 
+                    gutterBottom
+                    sx={{
+                        p: 2,
+                    }}
+                    >
                     Map View
                 </Typography>
                 <Box sx={{ height: "100%", backgroundColor: "#eaeaea", overflow: "hidden"}}>
