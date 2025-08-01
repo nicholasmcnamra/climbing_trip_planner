@@ -6,8 +6,7 @@ import Budget from "./Budget";
 import { useTrip } from "../../Context/TripContext";
 import ClimbDescription from "../ClimbDescription";
 import CragSelection from "../CragSelection";
-import { Palette } from "@mui/icons-material";
-
+import { ClimbingAreaMap } from "../ClimbingAreaMap";
 
 const TripPlanner:React.FC = () => {
     const [activeSection, setActiveSection] = useState("Crags");
@@ -15,6 +14,8 @@ const TripPlanner:React.FC = () => {
     const [selectedClimb, setSelectedClimb] = useState<any | null>(null);
     const [parentCrag, setParentCrag] = useState<any | null>(null);
     const theme = useTheme();
+
+    console.log(trip)
 
     const renderMainContent = () => {
 
@@ -104,8 +105,8 @@ const TripPlanner:React.FC = () => {
                 <Typography variant="h6" gutterBottom>
                     Map View
                 </Typography>
-                <Box sx={{ height: "100%", backgroundColor: "#eaeaea" }}>
-                    {/* <MapComponent area={selectedArea}/>*/}
+                <Box sx={{ height: "100%", backgroundColor: "#eaeaea", overflow: "hidden"}}>
+                    <ClimbingAreaMap/>
                 </Box>
             </Box>
         </Box>

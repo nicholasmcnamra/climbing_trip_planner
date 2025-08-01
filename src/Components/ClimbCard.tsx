@@ -37,8 +37,22 @@ export const ClimbCard:React.FC<{ area: string, climb: Climb, onClick: () => voi
                 
                 { !isClimbInItinerary(area, climb.id) ?
                     <Button 
-                    onClick={(e) => {e.stopPropagation(); addClimbToItinerary(area, climb)}}
-                    sx={{
+                        onClick={(e) => {e.stopPropagation(); addClimbToItinerary(area, climb)}}
+                        sx={{
+                            backgroundColor: theme.palette.secondary.dark,
+                            color: "white",
+                            borderRadius: 2,
+                            '&:hover': {
+                                backgroundColor: theme.palette.secondary.light,
+                            }
+                        }}
+                    >
+                        Add Climb
+                    </Button>
+                :
+                    <Button 
+                        onClick={(e) => {e.stopPropagation(); removeClimbFromItinerary(area, climb.id)}}
+                        sx={{
                         backgroundColor: theme.palette.secondary.dark,
                         color: "white",
                         borderRadius: 2,
@@ -46,11 +60,9 @@ export const ClimbCard:React.FC<{ area: string, climb: Climb, onClick: () => voi
                             backgroundColor: theme.palette.secondary.light,
                         }
                     }}
-                    >
-                        Add Climb
-                    </Button>
-                :
-                    <Button onClick={(e) => {e.stopPropagation(); removeClimbFromItinerary(area, climb.id)}}>Remove Climb</Button>}
+                        >
+                            Remove Climb
+                        </Button>}
             </CardContent>
 
         </Card>
