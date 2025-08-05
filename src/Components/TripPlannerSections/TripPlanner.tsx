@@ -47,7 +47,6 @@ const TripPlanner:React.FC = () => {
             sx={{
             display: "flex", 
             height: "100vh",
-            overflow: "hidden",
             }}
         >
             <Box
@@ -96,9 +95,11 @@ const TripPlanner:React.FC = () => {
             }}
             >
                 <Typography 
-                    variant="h4"
+                    variant="h3"
                     sx={{
-                        p: 0,
+                        p: 3,
+                        borderBottom: "1px solid",
+                        borderBottomColor: theme.palette.secondary.dark,
                     }}
                 >
                     Trip to {trip.current?.selectedArea?.area_name || "[Selected Area]"}

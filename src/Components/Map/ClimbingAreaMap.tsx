@@ -9,13 +9,13 @@ export const ClimbingAreaMap:React.FC = () => {
     const carabinerIcon = new Icon({
         iconUrl: "/assets/carabinericon.png",
         iconSize: [35, 30],
-        iconAnchor: [22, 94],
-        popupAnchor: [0, -38]
+        iconAnchor: [17, 94],
+        popupAnchor: [0, -94]
     })
 
-    const crags: any[] = trip?.current?.selectedArea?.children?.map((area: { metadata: any; }) => area.metadata)
+    const crags: any[] = trip?.current?.selectedArea?.children?.map((area: { area: any; }) => area)
 
-    console.log(crags);
+    console.log("Crags:", crags);
 
     if (!crags) {
         return (
@@ -26,7 +26,7 @@ export const ClimbingAreaMap:React.FC = () => {
         <Box
         >
             <MapContainer 
-                center={[crags[0]?.lat, crags[0]?.lng]} 
+                center={[crags[0]?.metadata?.lat, crags[0]?.metadata?.lng]} 
                 zoom={13} 
                 scrollWheelZoom 
                 style={{ height: '100vh', width: '100wh' }}
@@ -34,14 +34,15 @@ export const ClimbingAreaMap:React.FC = () => {
                 <TileLayer attribution='&copy; <a href="href="https://www.openstreetmap.org/copyright">Open Street Map</a> contributors' url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}></TileLayer>
                 {crags?.map((crag, index) => (
                     <Marker 
-                        position={[crag?.lat, crag?.lng]}
+                        position={[crag?.metadata?.lat, crag?.metadata?.lng]}
                         icon={carabinerIcon}
                     >
+                    <Popup>
+                       {crag.area_name}
+                    </Popup>
                     </Marker>
                 ))}
-                    {/* <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup> */}
+
             </MapContainer>
         </Box>
     )

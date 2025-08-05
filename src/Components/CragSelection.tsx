@@ -29,7 +29,8 @@ const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }>
     return (
         <Box sx={{
             display: "flex",
-            height: "100vh"
+            height: "100vh",
+            p: 3,
         }}>
             <Box
                 sx={{
