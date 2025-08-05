@@ -91,6 +91,8 @@ const TripPlanner:React.FC = () => {
                 flex: 1, 
                 p: 3,
                 overflowY: "auto",
+                height: "100%",
+                minHeight: 0,
             }}
             >
                 <Typography 
