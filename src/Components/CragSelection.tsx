@@ -34,16 +34,16 @@ const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }>
         }}>
             <Box
                 sx={{
-                    width: 300,
-                    borderRight: "1px solid #ccc",
-                    overflowY: "auto",
-                    padding: 1,
+                width: 300,
+                borderRight: "1px solid #ccc",
+                overflowY: "auto",
+                padding: 1,
                 }}
             >
                 <Box
                     sx={{
-                        fontWeight: "bold",
-                        mb: 2
+                    fontWeight: "bold",
+                    mb: 2
                     }}
                 >
                     {trip.current.selectedArea.area_name}
@@ -74,27 +74,27 @@ const CragSelection:React.FC<{ onClimbSelect: (climb: any, crag: any) => void }>
                 {selectedIndex !== null ? (
                     <Box
                         sx={{
-                            flexGrow: 1,
-                            display: "flex",
-                            flexDirection: "column",
-                            minHeight: 0,
+                        flexGrow: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        minHeight: 0,
                         }}
                     >
                         <h2>{trip.current.selectedArea.children[selectedIndex].area_name}</h2>
                         <Box 
                             sx={{
-                                flexGrow: 1,
-                                overflowY: "auto",
-                                minHeight: 0,
-                                borderColor: theme.palette.secondary.dark
+                            flexGrow: 1,
+                            overflowY: "auto",
+                            minHeight: 0,
+                            borderColor: theme.palette.secondary.dark
                             }}
                         >
                             {trip.current.selectedArea.children[selectedIndex].climbs.map((climb: any, index: number) => (
                                 <Box
                                     key={index}
                                     sx={{
-                                        borderBottom: index !== trip.current.selectedArea.children[selectedIndex].climbs.length - 1 ? "1px solid" : "none",
-                                        borderBottomColor: theme.palette.secondary.dark,
+                                    borderBottom: index !== trip.current.selectedArea.children[selectedIndex].climbs.length - 1 ? "1px solid" : "none",
+                                    borderBottomColor: theme.palette.secondary.dark,
                                     }}
                                 >
                                     <ClimbCard 

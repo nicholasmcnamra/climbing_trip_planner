@@ -37,9 +37,9 @@ export const ClimbingAreaMap:React.FC = () => {
                         position={[crag?.metadata?.lat, crag?.metadata?.lng]}
                         icon={carabinerIcon}
                     >
-                    <Popup>
-                       {crag.area_name}
-                    </Popup>
+                        <Popup>
+                            {crag.area_name}
+                        </Popup>
                     </Marker>
                 ))}
 
