@@ -6,7 +6,7 @@ import Budget from "./Budget";
 import { useTrip } from "../../Context/TripContext";
 import ClimbDescription from "../ClimbDescription";
 import CragSelection from "../CragSelection";
-import { ClimbingAreaMap } from "../ClimbingAreaMap";
+import { ClimbingAreaMap } from "../Map/ClimbingAreaMap";
 
 const TripPlanner:React.FC = () => {
     const [activeSection, setActiveSection] = useState("Crags");
